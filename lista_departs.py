@@ -1,0 +1,54 @@
+# 1. Delivery e Comida Rápida
+delivery = [
+    'IFOOD', 'RAPPI', 'ZE DELIVERY', 'UBER EATS', 'AIQFOME', 
+    'MC DONALDS', 'BURGER KING', 'BK', 'SUBWAY', 'STARBUCKS', 
+    'MADERO', 'COCO BAMBU', 'OUTBACK', 'HABIB', 'RAGAZZO', 'PIZZA HUT'
+]
+
+# 2. Grandes Varejistas e E-commerce
+varejo = [
+    'MERCADOLIVRE', 'MERCADO LIVRE', 'MERCADO PAGO', 'AMAZON', 'AMZN', 
+    'MAGALU', 'MAGAZINE LUIZA', 'SHOPEE', 'ALIEXPRESS', 'SHEIN', 
+    'CASAS BAHIA', 'PONTO FRIO', 'FAST SHOP', 'AMERICANAS', 
+    'HAVAN', 'RENNER', 'RIACHUELO', 'C&A', 'ZARA', 'DECATHLON', 
+    'CENTAURO', 'NETSHOES', 'DAFIT', 'LEROY MERLIN', 'TOK STOK'
+]
+
+# 3. Mobilidade e Transporte
+transporte = [
+    'UBER', '99APP', '99 POP', 'CABIFY', 'BLABLACAR', 
+    'SEM PARAR', 'VELOE', 'CONECTCAR', 'AUTO POSTO', 'POSTO', 
+    'IPIRANGA', 'SHELL BOX', 'BR PETROBRAS', 'ESTACIONAMENTO', 
+    'ESTAPAR', 'ZONA AZUL', 'METRO', 'CPTM', 'BILHETE UNICO', 'CLICKBUS'
+]
+
+# 4. Supermercado e Feira
+mercado = [
+    'CARREFOUR', 'PAO DE ACUCAR', 'EXTRA', 'ASSAI', 'ATACADAO', 
+    'DIA SUPERMERCADO', 'SAMS CLUB', 'BIG', 'ZAFFARI', 'MUNDIAL', 
+    'HORTIFRUTI', 'OBA HORTIFRUTI', 'NATURAL DA TERRA', 'MATERNE', 
+    'SUPERMERCADO', 'MERCEARIA', 'PADARIA', 'ACOUGUE', 'SACOLAO'
+]
+
+# 5. Entretenimento e Streaming
+entretenimento = [
+    'NETFLIX', 'SPOTIFY', 'AMAZON PRIME', 'DISNEY', 'HBO', 'GLOBOPLAY', 
+    'YOUTUBE', 'APPLE', 'GOOGLE PLAY', 'STEAM', 'PLAYSTATION', 'XBOX', 
+    'NINTENDO', 'KINOPLEX', 'CINEMARK', 'INGRESSO.COM', 'SYMPLA', 
+    'EVENTIM', 'LIVEPASS', 'LIVRARIA'
+]
+
+# 6. Saúde e Farmácia
+saude = [
+    'DROGASIL', 'DROGA RAIA', 'PAGUE MENOS', 'ULTRAFARMA', 'SAO JOAO', 
+    'PANVEL', 'ARAUJO', 'DROGARIA', 'FARMACIA', 'SMART FIT', 'BLUEFIT', 
+    'BIO RITMO', 'GYMPASS', 'TOTALPASS', 'CONSULTA', 'EXAME', 
+    'LABORATORIO', 'HOSPITAL', 'ODONTO'
+]
+
+# 7. Contas de Consumo e Serviços
+contas = [
+    'ENEL', 'LIGHT', 'CPFL', 'CEMIG', 'COPEL', 'SABESP', 'SANEAGO', 
+    'EMBASA', 'CEDAE', 'CLARO', 'VIVO', 'TIM', 'OI', 'NET', 'SKY', 
+    'CONDOMINIO', 'ALUGUEL', 'IPTU', 'IPVA', 'DARF', 'DAS'
+]

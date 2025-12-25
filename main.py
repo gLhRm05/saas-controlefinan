@@ -1,7 +1,7 @@
 import pandas as pd
 
 df = pd.read_csv('data.csv')
-
+print(f"="*100)
 print(df)
 
 def filtros():
@@ -32,8 +32,12 @@ def soma_dos_filtrados():
     print(f"="*100) 
 
 def lista_filtros():
+    varegistas = df[df['title'].str.startswith('Kabum',) | df['title'].str.startswith('Mercadolivre') | df['title'].str.startswith('Amazonmktplc')]
+    delivery = df[df['title'].str.startswith('Ifood') | df['title'].str.startswith('Ifd*') | df['title'].str.startswith('99food') ]
+    corridas = df[df['title'].str.startswith('Uber') | df['title'].str.startswith('Dl*99 Ride')]
     print(f"="*100)
     print(f'\nTABELA DE FILTROS')
+
     filtro_geral = [varegistas,delivery,corridas] #MOSTRA TODOS OS GASTOS COM OS FILTROS ATIVOS
     print(filtro_geral)
 
@@ -43,13 +47,19 @@ def lista_filtros():
     print(f"="*100)
 
 def total():
+    lista_sem_filtro = df[~(df['title'].str.startswith('Dl*99') | df['title'].str.startswith('Pagamento recebido')| df['title'].str.startswith('Ifood') |df['title'].str.startswith('Ifd*') | df['title'].str.startswith('99food') | df['title'].str.startswith('Uber') | df['title'].str.startswith('Kabum',) | df['title'].str.startswith('Mercadolivre') | df['title'].str.startswith('Amazon'))]
+
+    delivery_sum = df[df['title'].str.startswith('Ifd*') | df['title'].str.startswith('99food') ]['amount'].sum() #SOMA PLAT DELIVERY
+    corridas_sum = df[df['title'].str.startswith('Uber') | df['title'].str.startswith('Dl*99 Ride')]['amount'].sum() #SOMA PLAT CORRIDAS
+    varegistas_sum = df[df['title'].str.startswith('Kabum',) | df['title'].str.startswith('Mercadolivre') | df['title'].str.startswith('Amazonmktplc')]['amount'].sum() #SOMA GRANDES VAREGISTAS
+
     print(f"="*100) 
     print(f'\nTOTAL DE GASTOS')
     total = df[df['amount'] > 0]['amount'].sum() #SOMA O TOTAL RETIRANDO OS PAGAMENTOS
     print(f'R$ {total:.2f}')
 
     print(f'\nTOTAL DE GASTOS GERAIS')
-    print(f'R$ {lista_sem_filtros['amount'].sum():.2f}') #SOMA OS GASTOS SEM OS FILTROS
+    print(f'R$ {lista_sem_filtro['amount'].sum():.2f}') #SOMA OS GASTOS SEM OS FILTROS
 
     print(f'\nTOTAL DE GASTOS COM FILTROS')
     print(f'R$ {corridas_sum + delivery_sum + varegistas_sum:.2f}') #SOMA OS GASTIS COM OS FILTROS
