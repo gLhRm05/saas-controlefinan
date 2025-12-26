@@ -2,7 +2,8 @@
 delivery = [
     'IFOOD', 'RAPPI', 'ZE DELIVERY', 'UBER EATS', 'AIQFOME', 
     'MC DONALDS', 'BURGER KING', 'BK', 'SUBWAY', 'STARBUCKS', 
-    'MADERO', 'COCO BAMBU', 'OUTBACK', 'HABIB', 'RAGAZZO', 'PIZZA HUT'
+    'MADERO', 'COCO BAMBU', 'OUTBACK', 'HABIB', 'RAGAZZO', 'PIZZA HUT',
+    'IFD*', 'DL*99'
 ]
 
 # 2. Grandes Varejistas e E-commerce
@@ -11,7 +12,7 @@ varejo = [
     'MAGALU', 'MAGAZINE LUIZA', 'SHOPEE', 'ALIEXPRESS', 'SHEIN', 
     'CASAS BAHIA', 'PONTO FRIO', 'FAST SHOP', 'AMERICANAS', 
     'HAVAN', 'RENNER', 'RIACHUELO', 'C&A', 'ZARA', 'DECATHLON', 
-    'CENTAURO', 'NETSHOES', 'DAFIT', 'LEROY MERLIN', 'TOK STOK'
+    'CENTAURO', 'NETSHOES', 'DAFIT', 'LEROY MERLIN', 'TOK STOK','KABUM'
 ]
 
 # 3. Mobilidade e Transporte
