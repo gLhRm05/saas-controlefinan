@@ -53,3 +53,7 @@ contas = [
     'EMBASA', 'CEDAE', 'CLARO', 'VIVO', 'TIM', 'OI', 'NET', 'SKY', 
     'CONDOMINIO', 'ALUGUEL', 'IPTU', 'IPVA', 'DARF', 'DAS'
 ]
+
+user_preferences = [
+    
+]
