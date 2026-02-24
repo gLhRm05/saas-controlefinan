@@ -11,3 +11,8 @@ def uploaderArq():
 def inputPesquisa():
     categoria = st.text_input('Digite a categoria desejada: ').strip().upper()
     return categoria
+
+def inputCentroCustoAd():
+    nome = st.text_input('Digite o nome do centro de custo desejado')
+    titulo = st.text_input('Digite a palavra chave que identifica o titulo do gasto')
+    return nome, titulo

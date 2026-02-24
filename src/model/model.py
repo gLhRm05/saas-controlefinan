@@ -34,3 +34,20 @@ def pesquisar_categoria(df,categoria):
     st.dataframe(resultado)
     soma = resultado['amount'].sum()
     st.text(f'Total gasto em {categoria}: R$ {soma}')
+    return resultado, soma
+
+def adicionar_categoria_gastos(nome,titulo):
+    cfu = pd.read_csv('E:\PROJPY FINAN\saas-controlefinan\data\categorias_financeiras_user.csv')
+    nome_padrao = nome.upper().strip()
+    titulo_padrao = titulo.upper().strip()
+    if not nome_padrao or not titulo_padrao:
+        print('Não é possível adicionar valores vazios')
+        return cfu
+    elif ((cfu["CATEGORIA"] == nome_padrao)&(cfu["TITULO"] == titulo_padrao)).any():
+        print("Essa combinação já existe!")
+        return cfu
+    else:
+        nova_linha = {"CATEGORIA": nome_padrao,"TITULO": titulo_padrao}
+        cfu = pd.concat([cfu, pd.DataFrame([nova_linha])], ignore_index=True)
+        cfu.to_csv('E:\PROJPY FINAN\saas-controlefinan\data\categorias_financeiras_user.csv', index=False)
+        return cfu

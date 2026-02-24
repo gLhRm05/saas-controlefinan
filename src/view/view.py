@@ -10,3 +10,9 @@ def main():
         df = md.uploaded_file(arquivo)
         categoria = ct.inputPesquisa()
         md.pesquisar_categoria(df,categoria)
+
+    if st.toggle('Adcionar Centro de Custo'):
+        c_custo = ct.inputCentroCustoAd()
+        c_custo = list(c_custo)
+        dfusr = (md.adicionar_categoria_gastos(c_custo[0],c_custo[1]))
+        st.dataframe(dfusr)
