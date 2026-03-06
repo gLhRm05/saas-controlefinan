@@ -1,4 +1,4 @@
 from src.view.view import main
-import src.model.model
-import src.controller.controller
-main()
+
+if __name__ == "__main__":
+    main()

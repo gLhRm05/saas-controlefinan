@@ -1,18 +1,24 @@
-import pandas as pd
-import streamlit as st
-import src.view.view as v
 import src.model.model as md
+import pandas as pd
 
-def uploaderArq():
-    input_file = st.file_uploader('Faça o upload do arquivo CSV do seu banco:', type="csv")
-    return input_file
+#filtra apenas transacoes positivas do CSV
+def filtrarPositivos(arquivo):
+    if arquivo is not None:
+        df = pd.read_csv(arquivo)
+        dfpos = md.only_posi(df)
+        return dfpos
     
+def pesquisaCategoria(arquivo,categoria):
+    resultado = md.pesquisar_categoria(arquivo, categoria)
+    return resultado
 
-def inputPesquisa():
-    categoria = st.text_input('Digite a categoria desejada: ').strip().upper()
-    return categoria
+def requestSomarDf(arquivo):
+    soma = md.somarDf(arquivo)
+    return soma
 
-def inputCentroCustoAd():
-    nome = st.text_input('Digite o nome do centro de custo desejado')
-    titulo = st.text_input('Digite a palavra chave que identifica o titulo do gasto')
-    return nome, titulo
+def adicionarCategoria(nome,titulo):
+    addcat = md.adicionar_categoria_gastos(nome,titulo)
+    return addcat
+
+def categoriasGrafico(nome):
+    

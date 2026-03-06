@@ -1,53 +1,76 @@
 import pandas as pd
-import src.view.view as v
-import streamlit as st
-import src.controller.controller as ct
 import regex as re
-cfo = pd.read_csv('E:\PROJPY FINAN\saas-controlefinan\data\categorias_financeiras_organizado.csv')
-cfu = pd.read_csv('E:\PROJPY FINAN\saas-controlefinan\data\categorias_financeiras_user.csv')
-mvx = pd.read_csv('E:\PROJPY FINAN\saas-controlefinan\data\maxvalue.csv')
+from pathlib import Path
 
-def uploaded_file(arquivo):
-    arquivo = pd.read_csv(arquivo)
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DATA_DIR = BASE_DIR / "data"
+FIN_CSV = DATA_DIR / "categorias_financeiras_organizado.csv"
+MAXVAL_CSV = DATA_DIR / "maxvalue.csv"
+
+#==========CARREGA E SALVA CSV===========
+def carregar_categoriasdflt():
+    return pd.read_csv(FIN_CSV)
+def salvar_categoriasdflt(df):
+    df.to_csv(FIN_CSV, index=False)
+
+def carregar_maxval():
+    return pd.read_csv(MAXVAL_CSV)
+def salvar_maxval(df):
+    df.to_csv(MAXVAL_CSV, index=False)
+#=========================================
+
+
+def only_posi(arquivo):
     arquivo['title'].dtype == 'object'
     arquivo['title'] = arquivo['title'].str.upper()
     arquivo = arquivo[arquivo['amount'] > 0]
-    st.dataframe(arquivo)
-    st.text(f'Valor total gasto: R$ {arquivo['amount'].sum():.2f}')
     return arquivo
 
 def pesquisar_categoria(df,categoria):
-    regra = cfo[cfo['CATEGORIA'] == categoria]
-    regra_usr = cfu[cfu['CATEGORIA'] == categoria]
-    if regra.empty and regra_usr.empty:
-        st.text('CATEGORIA NAO ENCONTRADA')
-        return
+    cfo = carregar_categoriasdflt()
+    if categoria not in cfo['CATEGORIA'].values:
+        if categoria == 'TODOS':
+            pd.DataFrame(df)
+        else:
+            return pd.DataFrame()
+    
+    regra = pd.concat([cfo[cfo['CATEGORIA'] == categoria],])
+    
     regex = '|'.join(regra['TITULO'].dropna().astype(str).map(re.escape))
-    regex_usr = '|'.join(regra_usr['TITULO'].dropna().astype(str).map(re.escape))
-    if regra_usr.empty:
-        resultado = df[df['title'].str.contains(regex,case=False,na=False)]
-    if regra.empty:
-        resultado = df[df['title'].str.contains(regex_usr,case=False,na=False)]
-    if resultado.empty:
-        st.text('Digite uma categoria válida')
-        return
-    st.dataframe(resultado)
-    soma = resultado['amount'].sum()
-    st.text(f'Total gasto em {categoria}: R$ {soma}')
-    return resultado, soma
+    
+    resultado = df[df['title'].str.contains(regex, case=False, na=False)]
+
+    return resultado
 
 def adicionar_categoria_gastos(nome,titulo):
-    cfu = pd.read_csv('E:\PROJPY FINAN\saas-controlefinan\data\categorias_financeiras_user.csv')
+    cfo = carregar_categoriasdflt()
     nome_padrao = nome.upper().strip()
     titulo_padrao = titulo.upper().strip()
-    if not nome_padrao or not titulo_padrao:
-        print('Não é possível adicionar valores vazios')
-        return cfu
-    elif ((cfu["CATEGORIA"] == nome_padrao)&(cfu["TITULO"] == titulo_padrao)).any():
-        print("Essa combinação já existe!")
-        return cfu
-    else:
-        nova_linha = {"CATEGORIA": nome_padrao,"TITULO": titulo_padrao}
-        cfu = pd.concat([cfu, pd.DataFrame([nova_linha])], ignore_index=True)
-        cfu.to_csv('E:\PROJPY FINAN\saas-controlefinan\data\categorias_financeiras_user.csv', index=False)
-        return cfu
+
+    if (titulo_padrao == cfo['TITULO']).any():
+        return cfo
+    
+    nova_linha = {"CATEGORIA": nome_padrao,"TITULO": titulo_padrao}
+    cfo = pd.concat([cfo, pd.DataFrame([nova_linha])], ignore_index=True)
+    salvar_categoriasdflt(cfo)
+    return cfo
+
+def somarDf(arquivo):
+    soma = arquivo['amount'].sum()
+    return soma
+
+def categorias_grafico(df,categoria):
+    cfo = carregar_categoriasdflt()
+    if categoria not in cfo['CATEGORIA'].values:
+        if categoria == 'TODOS':
+            pd.DataFrame(df)
+        else:
+            return pd.DataFrame()
+    
+    regra = pd.concat([cfo[cfo['CATEGORIA'] == categoria],])
+    
+    regex = '|'.join(regra['TITULO'].dropna().astype(str).map(re.escape))
+    
+    resultado = df[df['title'].str.contains(regex, case=False, na=False)]
+
+    return resultado
