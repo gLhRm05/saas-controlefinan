@@ -1,12 +1,16 @@
 import streamlit as st
-import matplotlib.pyplot as mplb
+import matplotlib.pyplot as plt
 import src.controller.controller as ct
 def main():
+
+#===== Titulo e UpldFile
     st.title('FinanPy',text_alignment='center')
     st.markdown('Organize suas finanças de forma fácil',text_alignment='center')
     arquivo = st.file_uploader("Insira um arquivo CSV", type=["csv"])
     dfpositivo = ct.filtrarPositivos(arquivo)
     st.divider()
+
+#===== Primeira div
     if arquivo is not None:
         st.markdown('**Escolha o gasto que procura**', text_alignment='center')
         categoria = st.text_input('Pesquise a sua categoria:').strip().upper()
@@ -16,6 +20,8 @@ def main():
             soma = ct.requestSomarDf(resultado)
             st.text(f'O seu gasto total com {categoria} é de R${soma:.2f}')
         st.divider()
+
+#===== Segunda div
         st.markdown('**Adicione mais categorias ao filtro geral**',text_alignment='center')
         with st.form("gasto_form"):
             nome = st.text_input("Categoria")
@@ -25,5 +31,7 @@ def main():
             showadd = ct.adicionarCategoria(nome,titulo)
             st.dataframe(showadd)
         st.divider()
-    
-#==============================
+
+#===== Terceira div
+        st.markdown('Gráfico de gastos', text_alignment='center')
+        
