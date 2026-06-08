@@ -34,4 +34,7 @@ def main():
 
 #===== Terceira div
         st.markdown('Gráfico de gastos', text_alignment='center')
-        
+        df_categorias = ct.categoriasGrafico()
+        st.markdown(df_categorias)
+        fig = ct.criar_grafico_pizza(df_categorias)
+        st.pyplot(fig)
