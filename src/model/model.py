@@ -50,14 +50,10 @@ def somarDf(arquivo):
     soma = arquivo['amount'].sum()
     return soma
 #=============================================
-def categorias_grafico(df,categoria):
+def categorias_grafico():
     cfo = carregar_categoriasdflt()
-    if categoria not in cfo['CATEGORIA'].values:
-        if categoria == 'TODOS':
-            pd.DataFrame(df)
-        else:
-            return pd.DataFrame()
-    regra = pd.concat([cfo[cfo['CATEGORIA'] == categoria],])
-    regex = '|'.join(regra['TITULO'].dropna().astype(str).map(re.escape))   
-    resultado = df[df['title'].str.contains(regex, case=False, na=False)]
-    return resultado
+    if cfo.empty:
+        return pd.DataFrame(columns=['CATEGORIA', 'TOTAL'])
+    df_total = cfo.groupby('CATEGORIA')['TITULO'].count().reset_index()
+    df_total.columns = ['CATEGORIA', 'TOTAL']
+    return df_total
